@@ -65,3 +65,38 @@ Route::group(['prefix' => 'admin'], function () {
     });
 });
 */
+
+
+//=============== Используем контроллеры ============
+/**
+ * выполняем метод контроллера
+ * пространство имен по умолчанию определено в
+ * RouteServiceProvider::$namespace
+ */
+//Route::get('/about', 'TestController@show');
+/**
+ * передаем параметр в метод
+ */
+//Route::get('/about/{id}', 'TestController@show')->name('test');
+
+
+//==========Работаем с CRUD==========================
+//Route::resource('/pages', 'TestResourceController');
+
+/**
+ * разрешаем маршруты
+ */
+//Route::resource('/pages', 'TestResourceController',
+//    ['only' => 'index', 'show']
+//);
+/**
+ * исключаем маршруты
+ */
+//Route::resource('/pages', 'TestResourceController',
+//    ['except' => 'index', 'show']
+//);
+
+/**
+ * добаляем собственный метод в контроллер
+ */
+//Route::get('/pages/anyMethod', 'TestResourceController');
