@@ -100,3 +100,18 @@ Route::group(['prefix' => 'admin'], function () {
  * добаляем собственный метод в контроллер
  */
 //Route::get('/pages/anyMethod', 'TestResourceController');
+
+//===========ИЗУЧАЕМ MIDDLEWARES (КЛАССЫ ПОСРЕДНИКИ)==========
+/**
+ * создали свой класс посредник MyMiddleWare, реагирующий на параметр запроса page
+ */
+//Route::get('/article/{page}', 'TestController@show')->middleware('mymiddleware');
+
+/**
+ * add auth for admin/index page
+ */
+//Route::get('/admin/index', 'Admin\IndexController@index')->middleware('auth');
+
+Route::get('/login', function (){
+    return view('welcome');
+});
