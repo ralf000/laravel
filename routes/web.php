@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function (){
     return view('welcome');
 });
 
@@ -112,6 +112,7 @@ Route::group(['prefix' => 'admin'], function () {
  */
 //Route::get('/admin/index', 'Admin\IndexController@index')->middleware('auth');
 
-Route::get('/login', function (){
-    return view('welcome');
-});
+/**
+ * своя view
+ */
+Route::get('/bootstrap', 'IndexController@index');
