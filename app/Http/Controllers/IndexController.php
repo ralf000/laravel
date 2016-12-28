@@ -11,10 +11,10 @@ class IndexController extends Controller
          * передача данных во view
          */
         $data = [
-            'a' => 1,
+            'a' => 'Hello world!',
             'b' => 2
         ];
-//        return view('mytemplates.bootstrap_example', $data);
+        return view('index', $data);
 
         /**
          * проверяем view на существование
@@ -41,7 +41,7 @@ class IndexController extends Controller
          * config('view.paths') - обращаемся к свойству конфига view.php
          */
 //        $path = config('view.paths');
-//        return view()->file($path[0] . '/mytemplates.bootstrap_example.php', $data);
+//        return view()->file($path[0] . '/mytemplates.layout.blade.php', $data);
 
 
     }
