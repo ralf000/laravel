@@ -116,3 +116,5 @@ Route::group(['prefix' => 'admin'], function () {
  * своя view
  */
 Route::get('/bootstrap', 'IndexController@index');
+
+Route::get('/about', 'AboutController@index');
