@@ -120,3 +120,5 @@ Route::get('/bootstrap', 'IndexController@index');
 Route::get('/about', 'AboutController@index');
 
 Route::match(['get', 'post'], '/contacts/{id?}', ['uses'=>'ContactsController@index', 'as' => 'contact']);
+
+Route::get('/responce-test', 'ResponceTestController@index');
