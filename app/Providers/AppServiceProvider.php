@@ -13,7 +13,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        /**
+         * добавляем обработчик на событие использования подключения к бд
+         * тем самым можно, например, смотреть sql запросы
+         * либо посмотреть параметры sql запроса
+         */
+//        \DB::listen(function ($query){
+//            dump($query->sql);
+//            dump($query->bindings);
+//        });
     }
 
     /**
