@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
+use App\Page;
+use Faker\Factory;
 use Illuminate\Http\Request;
 
 class DBTestController extends Controller
@@ -51,7 +54,7 @@ class DBTestController extends Controller
         /**
          * get all
          */
-//        $articles = \DB::table('articles')->get();
+        $articles = \DB::table('articles')->get();
 
         /**
          * get first
@@ -190,4 +193,61 @@ class DBTestController extends Controller
             ? view('db-test2', ['articles' => $articles])
             : abort(404);
     }
+
+    public function pages()
+    {
+        /*
+        $articles = Page::all();
+        $articles = Page::where('id', '>', 5)->orderBy('title')->get();
+        $articles = Page::find(1);
+        $articles = Page::find([1,2,3]);
+        $articles = Page::findOrFail([1,2,3]);//[1,2,100] not found
+        */
+
+        $faker = Factory::create();
+        //insert
+        /**
+         * @var Page $page
+         */
+        $page = new Page();
+        $page->title = $faker->title;
+        $page->text = $faker->realText();
+//        $page->save();
+        /**
+         * чтобфы вставить в бд данные через метод create
+         * нужно сначала указать список полей в модели, доступных для записи
+         * через свойство fillable
+         * так как laravel запрещает писать в таблицу из под одноименной модели
+         * при помощи метода create
+         */
+//        Page::create([
+//            'title' => $faker->title,
+//            'text' => $faker->realText()
+//        ]);
+        //update
+        $page = Page::find(3);
+        $page->title = 'Мой заголовок';
+//        $page->save();
+
+        /**
+         * проверяем существует ли запись
+         * если нет то создаем и возвращает объект модели
+         * если да то возврается модель записи
+         */
+        Page::firstOrCreate([
+            'title' => $faker->title,
+            'text' => $faker->realText()
+        ]);
+        //delete
+//        Page::find(35)->delete();
+        //или
+//        Page::destroy(35);
+//        Page::destroy([35,36,37]);
+//        Page::where('id', '<', '3')->delete();
+
+        return (view()->exists('about'))
+            ? view('db-test2', ['articles' => []])
+            : abort(404);
+    }
+
 }
