@@ -125,6 +125,8 @@ Route::get('/articles', 'DBTestController@articles');
 
 Route::get('/pages', 'DBTestController@pages');
 
+Route::get('/relations-test', 'DBRelationsTestController@index');
+
 Route::match(['get', 'post'], '/contacts/{id?}', ['uses'=>'ContactsController@index', 'as' => 'contact']);
 
 Route::get('/responce-test', 'ResponceTestController@index');

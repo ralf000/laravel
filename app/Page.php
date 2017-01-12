@@ -21,6 +21,15 @@ class Page extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
-    
+
+    /**
+     * Связываем модель Page с моделью User
+     * Чтобы получать связанные модели user
+     * Можно использовать Page::find(5)->user;
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 
 }
