@@ -245,6 +245,45 @@ class DBTestController extends Controller
 //        Page::destroy([35,36,37]);
 //        Page::where('id', '<', '3')->delete();
 
+        /**
+         * Удаляем запись
+         * при этом она не удаляется из бд
+         * только лишь заполняется поле deleted_at
+         * теперь этой записи как-будто бы нет
+         */
+        Page::find(35)->delete();
+        /**
+         * Вытащить запись из "корзины" можно так
+         * получить все записи
+         */
+        $pages = Page::withTrashed()->get();
+        /**
+         * проверить удалена ли запись можно так
+         */
+        $pages = Page::withTrashed()->get();
+        foreach ($pages as $page) {
+            if ($page->trashed())
+                echo $page->id . ' удалена';
+        }
+
+        /**
+         * Вытащить из корзины все записи
+         * то есть поле deleted_at будет очищено
+         */
+        $pages = Page::withTrashed()->get();
+        foreach ($pages as $page) {
+            if ($page->trashed())
+                echo $page->restore();
+        }
+        //или так
+        $pages = Page::onlyTrashed()->restore();
+
+        /**
+         * удалить окончательно
+         */
+        Page::find(3)->forceDelete();
+        Page::onlyTrashed()->forceDelete();
+
         return (view()->exists('about'))
             ? view('db-test2', ['articles' => []])
             : abort(404);
