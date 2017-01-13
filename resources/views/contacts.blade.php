@@ -3,11 +3,20 @@
 @section('content')
     <div class="row">
 
-    <?php var_dump(Session::all()) ?>
-
         <div class="col-lg-12">
 
             <h1>Contact form Tutorial from <a href="http://bootstrapious.com">Bootstrapious.com</a></h1>
+
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
 
             <p class="lead">This is a demo for our tutorial dedicated to crafting working Bootstrap contact form with
                 PHP and AJAX background.</p>
@@ -24,7 +33,7 @@
                             <div class="form-group">
                                 <label for="form_name">Firstname *</label>
                                 <input id="form_name" type="text" name="name" value="{{ old('name') }}" class="form-control"
-                                       placeholder="Please enter your firstname *" required="required"
+                                       placeholder="Please enter your firstname *"
                                        data-error="Firstname is required.">
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -33,7 +42,7 @@
                             <div class="form-group">
                                 <label for="form_lastname">Lastname *</label>
                                 <input id="form_lastname" type="text" name="surname" value="{{ old('surname') }}" class="form-control"
-                                       placeholder="Please enter your lastname *" required="required"
+                                       placeholder="Please enter your lastname *"
                                        data-error="Lastname is required.">
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -44,7 +53,7 @@
                             <div class="form-group">
                                 <label for="form_email">Email *</label>
                                 <input id="form_email" type="email" name="email" value="{{ old('email') }}" class="form-control"
-                                       placeholder="Please enter your email *" required="required"
+                                       placeholder="Please enter your email *"
                                        data-error="Valid email is required.">
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -63,7 +72,7 @@
                             <div class="form-group">
                                 <label for="form_message">Message *</label>
                                 <textarea id="form_message" name="message" class="form-control"
-                                          placeholder="Message for me *" rows="4" required="required"
+                                          placeholder="Message for me *" rows="4"
                                           data-error="Please,leave us a message.">{{ old('message') }}</textarea>
                                 <div class="help-block with-errors"></div>
                             </div>

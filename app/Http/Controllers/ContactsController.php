@@ -65,7 +65,19 @@ class ContactsController extends Controller
 //            $request->flashExcept(['phone']);
 //            $request->flash();
 //            return redirect()->route('contact');
-            return back()->withInput();
+//            return back()->withInput();
+
+            /**
+             * Валидируем данные
+             */
+            $rules = [
+                'name' => 'required|max:100|unique:users,name',
+                'email' => 'required|email'
+            ];
+            $this->validate($request, $rules);
+            //если валидация успешна то код дальше выполнится
+            dump($request);
+
         }
 
         if (view()->exists('contacts'))
