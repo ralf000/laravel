@@ -22,7 +22,7 @@
                 PHP and AJAX background.</p>
 
 
-            <form id="contact-form" method="post" action="" role="form">
+            <form id="contact-form" method="post" action="{{ route('contact') }}" role="form">
 
                 <div class="messages"></div>
 

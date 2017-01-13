@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactsRequest;
 use Illuminate\Http\Request;
 
 class ContactsController extends Controller
@@ -21,7 +22,7 @@ class ContactsController extends Controller
     }
 
 
-    public function index(Request $request, $id = 1)
+    public function index(ContactsRequest $request, $id = 1)
     {
 //        // var_dump($id);
 //        if ($request->has('name'))
@@ -70,13 +71,29 @@ class ContactsController extends Controller
             /**
              * Валидируем данные
              */
-            $rules = [
-                'name' => 'required|max:100|unique:users,name',
-                'email' => 'required|email'
-            ];
-            $this->validate($request, $rules);
-            //если валидация успешна то код дальше выполнится
-            dump($request);
+//            $rules = [
+//                'name' => 'required|max:100|unique:users,name',
+//                'email' => 'required|email'
+//            ];
+//            $this->validate($request, $rules);
+//            //если валидация успешна то код дальше выполнится
+//            dump($request);
+
+            /**
+             * Валидация массивов
+             * Первый аргумент: массив данных для валидации
+             * второй - правила валидации
+             */
+//            $validator = \Validator::make($request->all(), [
+//                'name' => 'required|max:100|unique:users,name',
+//                'email' => 'required|email'
+//            ]);
+//            if ($validator->fails()) {
+//                return redirect()
+//                    ->route('contact')
+//                    ->withErrors($validator)
+//                    ->withInput();
+//            }
 
         }
 
