@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Page;
 use App\Role;
 use App\User;
+use Carbon\Carbon;
+use Faker\Factory;
 use Illuminate\Http\Request;
 
 class DBRelationsTestController extends Controller
@@ -65,6 +67,52 @@ class DBRelationsTestController extends Controller
          */
 //        $users = User::has('pages', '>=', 3)->get();
 
+//        ==================================================
+
+        /**
+         * добавление записи в таблицу,
+         * имеющую связанные таблицы
+         */
+//        $user = User::find(2);
+//        $faker = Factory::create();
+//        $page = new Page([
+//            'title' => $faker->text(50),
+//            'text' => $faker->realText()
+//        ]);
+//        $user->pages()->save($page);
+
+        /**
+         * Другой вариант
+         */
+//        $user = User::find(2);
+//        $faker = Factory::create();
+//        $user->pages()->create([
+//            'title' => $faker->text(50),
+//            'text' => $faker->realText()
+//        ]);
+        /**
+         * Ещё вариант
+         */
+//        $user = User::find(3);
+//        $faker = Factory::create();
+//        $user->pages()->saveMany([
+//            new Page([
+//                'title' => $faker->text(50),
+//                'text' => $faker->realText()
+//            ]),
+//            new Page([
+//                'title' => $faker->text(50),
+//                'text' => $faker->realText()
+//            ])
+//        ]);
+
+        /**
+         * Обновление связанных данных
+         */
+//        $user = User::find(1);
+//        $user->roles()->where('roles.id', 1)->update([
+//            'name' => 'Administrator',
+//        ]);
 
         return (view()->exists('relations'))
             ? view('relations', ['user' => $user, 'page' => $page])
