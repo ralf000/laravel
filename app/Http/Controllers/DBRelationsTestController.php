@@ -114,6 +114,43 @@ class DBRelationsTestController extends Controller
 //            'name' => 'Administrator',
 //        ]);
 
+        /**
+         * Привязываем пользователя 2 к странице 1
+         * До этого он был привязан к странице 3
+         * one to one
+         * one to many
+         */
+//        $page = Page::find(1);
+//        $user = User::find(2);
+//        $page->user()->associate($user)->save();
+
+        /**
+         * Привязать пользователя ко всем выбранным записям
+         * one to many
+         */
+//        $pages = Page::where('id', '<', 5)->get();
+//        $user = User::find(1);
+//        foreach ($pages as $page) {
+//            $page->user()->associate($user)->save();
+//        }
+
+        /**
+         * many to many
+         * Привязываем пользователя 2 к роли 2
+         */
+//        $user = User::find(2);
+//        $roleId = Role::find(2)->id;
+//        $user->roles()->attach($roleId);
+
+        /**
+         * many to many
+         * Удалить запись из связующей таблицы
+         */
+//        $user = User::find(2);
+//        $roleId = Role::find(2)->id;
+//        $user->roles()->detach($roleId);
+
+
         return (view()->exists('relations'))
             ? view('relations', ['user' => $user, 'page' => $page])
             : abort(404);
