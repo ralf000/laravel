@@ -137,3 +137,15 @@ Route::get('/responce-test', 'ResponceTestController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+/**
+ * создаём свою группу закрытых маршрутов
+ */
+$attributes = [
+    'prefix' => 'admin',
+    'middleware' => ['web','auth']
+];
+Route::group($attributes, function (){
+    Route::get('/', 'Admin\AdminController@index')->name('admin_index');
+    Route::get('/add/post', 'Admin\AdminPostController@create')->name('admin_add_post');
+});

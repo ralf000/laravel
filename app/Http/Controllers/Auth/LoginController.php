@@ -36,4 +36,15 @@ class LoginController extends Controller
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
+
+    /**
+     * Перезаписываем метод для корректной аутефикации по логину, а не емейлу
+     * @return string
+     */
+    public function username()
+    {
+        return 'login';
+    }
+
+
 }
