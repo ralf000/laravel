@@ -149,3 +149,8 @@ Route::group($attributes, function (){
     Route::get('/', 'Admin\AdminController@index')->name('admin_index');
     Route::get('/add/post', 'Admin\AdminPostController@create')->name('admin_add_post');
 });
+
+Route::group(['middleware' => 'web'], function (){
+    Route::get('/login', 'Auth\MyAuthController@showLogin');
+    Route::post('/login', 'Auth\MyAuthController@authenticate');
+});
