@@ -31,5 +31,17 @@ class ContactsRequest extends FormRequest
             'email' => 'required|email'
         ];
     }
-    
+
+    /**
+     * Свои сообщения об ошибках
+     * @see \resources\lang\en\validation.php
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'required' => 'Поле :attribute обязательно к заполнению'
+        ];
+    }
+
 }

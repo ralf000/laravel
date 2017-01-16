@@ -96,9 +96,13 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'name' => [
+            'required' => 'Поле Name Обязательно к заполнению',
         ],
+        'email' => [
+            'max' => 'Максимально допустимое количество символов - :max',
+            'required' => 'Email Обязателен!'
+        ]
     ],
 
     /*

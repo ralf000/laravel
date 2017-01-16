@@ -22,7 +22,7 @@ class ContactsController extends Controller
     }
 
 
-    public function index(ContactsRequest $request, $id = 1)
+    public function index(Request $request, $id = 1)
     {
 //        // var_dump($id);
 //        if ($request->has('name'))
@@ -83,17 +83,29 @@ class ContactsController extends Controller
              * Валидация массивов
              * Первый аргумент: массив данных для валидации
              * второй - правила валидации
+             * $messages - свои сообщения об ошибках
              */
-//            $validator = \Validator::make($request->all(), [
-//                'name' => 'required|max:100|unique:users,name',
-//                'email' => 'required|email'
-//            ]);
-//            if ($validator->fails()) {
-//                return redirect()
-//                    ->route('contact')
-//                    ->withErrors($validator)
-//                    ->withInput();
-//            }
+            $messages = [
+                'name.required' => 'Поле Name Обязательно!',
+                'email.max' => 'Максимально допустимое количество символов - :max',
+            ];
+
+            $validator = \Validator::make($request->all(), [
+                'name' => 'required|max:100|unique:users,name',
+                'email' => 'required|email'
+            ], $messages);
+
+            if ($validator->fails()) {
+
+                //настраиваем внешний вид ошибок
+//                if ($messages->has('name'))
+//                    dump($messages->all('<p> :messages </p>'));
+
+                return redirect()
+                    ->route('contact')
+                    ->withErrors($validator)
+                    ->withInput();
+            }
 
         }
 
