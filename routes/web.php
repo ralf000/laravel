@@ -119,7 +119,7 @@ Route::get('/bootstrap', 'IndexController@index');
 
 //Route::get('/about', 'AboutController@index');
 
-Route::get('/about', 'DBTestController@index');
+Route::get('/about', 'DBTestController@index')->middleware('auth');
 
 Route::get('/articles', 'DBTestController@articles');
 
@@ -131,3 +131,9 @@ Route::get('/contacts', ['uses'=>'ContactsController@index', 'as' => 'contact'])
 Route::post('/contacts', ['uses'=>'ContactsController@index']);
 
 Route::get('/responce-test', 'ResponceTestController@index');
+
+//Регистрирует основные маршруты для аунтефикации пользователей
+//подробнее artisan route:list
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

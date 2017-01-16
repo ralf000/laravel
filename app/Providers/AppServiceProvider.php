@@ -18,10 +18,10 @@ class AppServiceProvider extends ServiceProvider
          * тем самым можно, например, смотреть sql запросы
          * либо посмотреть параметры sql запроса
          */
-        \DB::listen(function ($query){
-            dump($query->sql);
-            dump($query->bindings);
-        });
+//        \DB::listen(function ($query){
+//            dump($query->sql);
+//            dump($query->bindings);
+//        });
     }
 
     /**
