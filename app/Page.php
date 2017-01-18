@@ -49,18 +49,18 @@ class Page extends Model
      * @param $value
      * @return string
      */
-    public function getTitleAttribute($value)
-    {
-        return 'hello world - ' . $value . ' - hello world';
-    }
+//    public function getTitleAttribute($value)
+//    {
+//        return 'hello world - ' . $value . ' - hello world';
+//    }
 
     /**
      * Методы преобразователи
      * @param $value
      */
-    public function setTitleAttribute($value)
-    {
-        $this->attributes['title'] = " | $value | ";
-    }
+//    public function setTitleAttribute($value)
+//    {
+//        $this->attributes['title'] = " | $value | ";
+//    }
 
 }

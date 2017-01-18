@@ -14,6 +14,9 @@ class AdminPostController extends Controller
 
     public function create(Request $request)
     {
+        if (\Gate::denies('add-page'))
+            return redirect()->back()->with('message', 'Добавление страницы запрещено');
+
         $this->validate($request, [
             'title' => 'required'
         ]);

@@ -28,11 +28,18 @@ class AdminUpdatePostController extends Controller
         $data = $request->except('_token');
         $page = Page::find($data['id']);
 
-        $page->title = $data['title'];
-        $page->text = $data['text'];
+        /**
+         * @see App\Providers\AuthServiceProvider::boot
+         */
+        if (\Gate::allows('update-page', $page)) {
 
-        $result = $user->pages()->save($page);
+            $page->title = $data['title'];
+            $page->text = $data['text'];
 
-        return redirect()->back()->with('message', 'Материал обновлен');
+            $result = $user->pages()->save($page);
+
+            return redirect()->back()->with('message', 'Материал обновлен');
+        }
+        return redirect()->back()->with('message', 'Нет доступа для обновления материала');
     }
 }

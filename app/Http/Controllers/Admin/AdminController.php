@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Page;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,6 @@ class AdminController extends Controller
         //user id
 //        dd(\Auth::id());
 
-        return view('home');
+        return view('home', ['pages' => Page::limit(5)->get()]);
     }
 }
