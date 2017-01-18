@@ -138,6 +138,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::group(['middleware' => 'web'], function (){
+    Route::get('/login', 'Auth\MyAuthController@showLogin');
+    Route::post('/login', 'Auth\MyAuthController@authenticate');
+});
+
 /**
  * создаём свою группу закрытых маршрутов
  */
@@ -147,10 +152,10 @@ $attributes = [
 ];
 Route::group($attributes, function (){
     Route::get('/', 'Admin\AdminController@index')->name('admin_index');
-    Route::get('/add/post', 'Admin\AdminPostController@create')->name('admin_add_post');
-});
 
-Route::group(['middleware' => 'web'], function (){
-    Route::get('/login', 'Auth\MyAuthController@showLogin');
-    Route::post('/login', 'Auth\MyAuthController@authenticate');
+    Route::get('/add/post', 'Admin\AdminPostController@index')->name('admin_add_post');
+    Route::post('/add/post', 'Admin\AdminPostController@create')->name('admin_add_post_p');
+    
+    Route::get('/update/post/{id}', 'Admin\AdminUpdatePostController@index')->name('admin_update_post');
+    Route::post('/update/post', 'Admin\AdminUpdatePostController@create')->name('admin_update_post_p');
 });
