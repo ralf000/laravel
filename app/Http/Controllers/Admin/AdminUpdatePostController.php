@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Page;
+use App\Policies\PagePolicy;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -30,8 +31,14 @@ class AdminUpdatePostController extends Controller
 
         /**
          * @see App\Providers\AuthServiceProvider::boot
+         * @see App\Policies\PagePolicy
+         * 1 вариант для authServiceProvider + gate
+         * 2 вариант для PagePolicy + gate
+         * 3 вариант самый удобный
          */
-        if (\Gate::allows('update-page', $page)) {
+//        if (\Gate::allows('update-page', $page)) {
+//        if (\Gate::allows('update', $page)) {
+        if ($request->user()->can('update', $page)) {
 
             $page->title = $data['title'];
             $page->text = $data['text'];
