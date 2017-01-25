@@ -117,10 +117,10 @@ return [
     | you a variety of powerful log handlers / formatters to utilize.
     |
     | Available Settings: "single", "daily", "syslog", "errorlog"
-    |
+    | Daily - файлы логи будут создаваться каждый день (удобнее чем один файл на все времена)
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'log' => env('APP_LOG', 'daily'),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 

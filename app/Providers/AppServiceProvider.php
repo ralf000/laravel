@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Page;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,6 +23,15 @@ class AppServiceProvider extends ServiceProvider
 //            dump($query->sql);
 //            dump($query->bindings);
 //        });
+
+        /**
+         * Используем предустановленное событие
+         * При каждом содании новой страницы (Page)
+         * в логи записывается информация об этом
+         */
+        Page::created(function (Page $page) {
+            \Log::info('Page saved in database', [$page->user->name => $page->title]);
+        });
     }
 
     /**

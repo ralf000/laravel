@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\OnAddPageEvent;
+use App\Listeners\AddPageListener;
 use App\Page;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -42,11 +44,23 @@ class AdminPostController extends Controller
         /**
          * Используя связанную с пользователем таблицу pages
          * сохраняем в неё поступившие данные
+         * @var $result Page
          */
         $result = $user->pages()->create([
             'title' => $data['title'],
             'text' => $data['text']
         ]);
+
+        /**
+         * Указываем, что происходит событие
+         * (выбрасываем событие)
+         * @see App\Events\OnAddPageEvent
+         * @see App\Listeners\AddPageListener
+         */
+        //1 вариант
+        \Event::fire(new OnAddPageEvent($result, $user));
+        //2 вариант
+//        event(new OnAddPageEvent($result, $user));
 
         return redirect()->back()->with('message', 'Материал добавлен');
     }
