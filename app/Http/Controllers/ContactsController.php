@@ -132,7 +132,7 @@ class ContactsController extends Controller
 
 
         if (view()->exists('contacts'))
-            return view('contacts', ['title' => $title, 'lead' => $lead, 'apple' => $apple, 'crow' => $crow]);
+            return view('contacts', compact('title', 'lead', 'apple', 'crow'));
         return abort(404);
     }
 }
