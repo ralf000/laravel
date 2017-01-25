@@ -5,7 +5,7 @@
 
         <div class="col-lg-12">
 
-            <h1>Contact form Tutorial from <a href="http://bootstrapious.com">Bootstrapious.com</a></h1>
+            <h1>{{ $title }}</h1>
 
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
@@ -18,8 +18,9 @@
             @endif
 
 
-            <p class="lead">This is a demo for our tutorial dedicated to crafting working Bootstrap contact form with
-                PHP and AJAX background.</p>
+            <p class="lead">{{ $lead }}</p>
+            <h4>{{ $apple }}</h4>
+            <h4>{{ $crow }}</h4>
 
 
             <form id="contact-form" method="post" action="{{ route('contact') }}" role="form">

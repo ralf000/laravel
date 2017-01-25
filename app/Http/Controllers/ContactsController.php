@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactsRequest;
+use App\User;
 use Illuminate\Http\Request;
 
 class ContactsController extends Controller
@@ -109,8 +110,29 @@ class ContactsController extends Controller
 
         }
 
+        /**
+         * Используем файл локализации для вывода данных в шаблон
+         * @see resources\lang\ru\messages.php
+         */
+        $title = \Lang::get('messages.welcome');
+        $lead = \Lang::get('messages.hello', ['name' => \Auth::user()->name]);
+        /**
+         * для формирования правильного окончания
+         * 1 агрумент - ячейка массива
+         * 2 - количество
+         * @see resources\lang\ru\messages.php::apple
+         */
+        $apple = \Lang::choice('messages.apple', 12);
+        /**
+         * Сами указали правила подстановки окончаний
+         * @see resources\lang\ru\messages.php::crow
+         */
+        if (\Lang::has('messages.crow'))
+            $crow = \Lang::choice('messages.crow', 15);
+
+
         if (view()->exists('contacts'))
-            return view('contacts');
+            return view('contacts', ['title' => $title, 'lead' => $lead, 'apple' => $apple, 'crow' => $crow]);
         return abort(404);
     }
 }
