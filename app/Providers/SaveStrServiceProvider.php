@@ -32,7 +32,7 @@ class SaveStrServiceProvider extends ServiceProvider
          * если мы хотим привязать конретную реализацию то можно написать так
          * $this->app->bind(ISaveStr::class, SaveEloquentORM::class);
          */
-        $this->app->bind(ISaveStr::class, function (){
+        $this->app->bind('savestr', function (){
         //если создаваемый объект должен быть в одном экземпляре во всей системе
         //$this->app->singleton(ISaveStr::class, function (){
             return new SaveEloquentORM();

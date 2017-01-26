@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Contracts\ISaveStr;
+use App\Helpers\Facades\SaveStr;
 use App\Http\Requests\ContactsRequest;
 use App\User;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ class ContactsController extends Controller
         $this->request = $request;
     }
 
-    public function store(Request $request, ISaveStr $saveStr, $id = false)
+    public function store(Request $request, /*ISaveStr $saveStr,*/ $id = false)
     {
 
         /**
@@ -37,7 +38,8 @@ class ContactsController extends Controller
         /**
          * Получаем объект через внедренную зависимость
          */
-        $saveStr->save($request, \Auth::user());
+//        $saveStr->save($request, \Auth::user());
+        SaveStr::save($request, \Auth::user());
 
         return redirect()->route('contact');
     }
