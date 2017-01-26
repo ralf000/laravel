@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Contracts\ISaveStr;
 use App\Http\Requests\ContactsRequest;
 use App\User;
 use Illuminate\Http\Request;
@@ -20,6 +21,13 @@ class ContactsController extends Controller
     public function __construct(Request $request)
     {
         $this->request = $request;
+    }
+
+    public function store(Request $request, ISaveStr $saveStr, $id = false)
+    {
+        $saveStr->save($request, \Auth::user());
+
+        return redirect()->route('contact');
     }
 
 
