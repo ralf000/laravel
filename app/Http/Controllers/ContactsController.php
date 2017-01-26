@@ -25,6 +25,18 @@ class ContactsController extends Controller
 
     public function store(Request $request, ISaveStr $saveStr, $id = false)
     {
+
+        /**
+         * Получаем объект реализации, указанного в первом аргументе, интерфейса
+         * Для этого используем фасад App
+         * То есть получаем объект вручную, без внедрения зависимости
+         */
+//        $saveStr = \App::make(ISaveStr::class);
+//        $saveStr->save($request, \Auth::user());
+
+        /**
+         * Получаем объект через внедренную зависимость
+         */
         $saveStr->save($request, \Auth::user());
 
         return redirect()->route('contact');

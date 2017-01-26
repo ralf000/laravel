@@ -10,6 +10,8 @@ use Illuminate\Support\ServiceProvider;
 class SaveStrServiceProvider extends ServiceProvider
 {
     /**
+     * Исполнится после регистрации (загрузки) всех сервисПровайдеров
+     * Сюда можно внедрять любую логику и добавлять зависимости типа Request $request
      * Bootstrap the application services.
      *
      * @return void
@@ -26,9 +28,16 @@ class SaveStrServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        /**
+         * если мы хотим привязать конретную реализацию то можно написать так
+         * $this->app->bind(ISaveStr::class, SaveEloquentORM::class);
+         */
         $this->app->bind(ISaveStr::class, function (){
-//            return new SaveFile();
+        //если создаваемый объект должен быть в одном экземпляре во всей системе
+        //$this->app->singleton(ISaveStr::class, function (){
             return new SaveEloquentORM();
+            //или другой объект, реализующий интерфейс ISaveStr
+            //return new SaveFile();
         });
     }
 }
