@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Employee;
+use App\Helpers\Helper;
 use App\Page;
 use App\Portfolio;
 use App\Service;
@@ -17,7 +18,15 @@ class IndexController extends Controller
         $services = Service::where('id', '<', 20)->get();
         $employee = Employee::take(3)->get();
 
+        $addMenuItems = [
+            ['title' => 'Services', 'alias' => 'service'],
+            ['title' => 'Portfolio', 'alias' => 'portfolio'],
+            ['title' => 'Clients', 'alias' => 'clients'],
+            ['title' => 'Team', 'alias' => 'team'],
+            ['title' => 'Contact', 'alias' => 'contact']
+        ];
+        $menu = Helper::getMainMenu($addMenuItems);
 
-        return view('site.index');
+        return view('site.index', compact(['menu', 'pages', 'services', 'portfolio']));
     }
 }
