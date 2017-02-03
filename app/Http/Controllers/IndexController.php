@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use App\Employee;
+use App\Filter;
 use App\Helpers\Helper;
 use App\Page;
 use App\Portfolio;
@@ -13,10 +15,21 @@ class IndexController extends Controller
 {
     public function execute(Request $request)
     {
+        /**
+         * разные способы выборки
+         */
         $pages = Page::all();
-        $portfolio = Portfolio::get(['name', 'image']);
+        $portfolio = Portfolio::get(['id','name', 'image', 'filter_id']);
+        $filters = Filter::all();
         $services = Service::where('id', '<', 20)->get();
-        $employee = Employee::take(3)->get();
+        $clients = Client::all();
+        $employees = Employee::take(3)->get();
+
+        /**
+         * можно выбрать только уникальные фильтры
+         * фасад DB
+         */
+        // $result = \DB::table('filters')->distinct()->get(['title']);
 
         $addMenuItems = [
             ['title' => 'Services', 'alias' => 'service'],
@@ -27,6 +40,6 @@ class IndexController extends Controller
         ];
         $menu = Helper::getMainMenu($addMenuItems);
 
-        return view('site.index', compact(['menu', 'pages', 'services', 'portfolio']));
+        return view('site.index', compact(['menu', 'pages', 'services', 'portfolio', 'filters', 'clients', 'employees']));
     }
 }
