@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => 'web'], function () {
+Route::group([], function () {
 
     Route::match(
         ['get', 'post'],

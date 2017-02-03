@@ -13,7 +13,9 @@
                     <div id="main-nav" class="collapse navbar-collapse navStyle">
                         <ul class="nav navbar-nav" id="mainNav">
                             @foreach($menu as $key => $item)
-                                <li class="{{ $key === 0 ? 'active' : '' }}"><a href="#{{ $item['alias'] }}" class="scroll-link">{{ $item['title'] }}</a></li>
+                                <li class="{{ $key === 0 ? 'active' : '' }}"><a href="#{{ $item['alias'] }}"
+                                                                                class="scroll-link">{{ $item['title'] }}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
@@ -21,4 +23,21 @@
             </nav>
         </div>
     </div>
+
+    @if(session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+
+    @if(count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
 </header>
