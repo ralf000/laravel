@@ -27,7 +27,7 @@
 
                         <!-- подмена типа запроса, прописан post,
                         мы ниже указываем delete иначе данные через delete не отправить -->
-                        {!! Form::hidden('action', 'delete') !!}
+                        {{ method_field('delete') }}
                         {!! Form::button('Удалить', ['class'=>'btn btn-danger','type'=>'submit']) !!}
 
                     {!! Form::close() !!}</td>

@@ -40,8 +40,13 @@ class PagesEditController extends Controller
             $page->fill($input);
 
             if ($page->update()){
-                return redirect('admin')->with('status', 'Страница обновлена');
+                return redirect('admin/pages')->with('status', 'Страница обновлена');
             }
+        }
+
+        if ($request->isMethod('delete')) {
+            $page->delete();
+            return redirect('admin/pages')->with('status', 'Страница удалена');
         }
         /**
          * если в текущем маршруте есть id
